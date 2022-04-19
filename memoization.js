@@ -2,24 +2,26 @@
 	Date: 19 April 2022, Thursday
 */
 
-function memoize(callback) {
-	let cache  = {}
-	return function(a, b) {
-		var n = a + b
-		if(n in cache) {
-			return cache[n];
+function memoize (value) {
+	let cahce = {};
+	return function(value) {
+		if(value in cahce) {
+			console.log('From cache');
+			return cahce[value]
+		} else {
+			let result = value + 10;
+			cahce[value] = result;
+			console.log('Calculated Result');
+			return result; 
 		}
-		let result = callback(a, b);
-		cache[n] = result;
-		return result;
 	}
 }
 
-function addition(a, b) {
-	return a + b;
-}
 
-var start = new Date();
-const sum = memoize(addition);
-sum(2, 3);
-console.log(new Date() -  start);
+const start_1 = new Date();
+
+
+const newAdd = memoize();
+console.log(newAdd(10));
+console.log(newAdd(10));
+console.log(newAdd(10));
